@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 
   cout << "Using a tolerance of " << tol << "\n";
 
-  int spg = findSpaceGroup(c);
+  int spg = findSpaceGroup(c, tol);
 
   cout << "spg is " << spg << "\n";
   return 0;
@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 
 int findSpaceGroup(Crystal c, double prec) {
   // Check that the precision is reasonable
-  if (prec < 1e-5) {
+  if (prec < 1e-7) {
     std::cerr  << "findSpaceGroup called with a precision of "
                << prec << ". This is likely an error. Resetting prec to "
                << 0.05 << ".";
