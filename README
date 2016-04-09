@@ -1,0 +1,10 @@
+Written by - Patrick S. Avery - 2016
+
+This uses the spacegroup library to detect the spacegroup of a crystal
+It takes POSCAR files for input
+
+To build this, just type:
+
+ mkdir build; cd build; cmake ..; make
+
+And it should create the executable in your build directory!
