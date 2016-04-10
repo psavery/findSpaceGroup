@@ -19,11 +19,13 @@
 
 extern "C" {
 #include "../spglib/spglib.h"
+#include "../spglib/niggli.h"
 }
 
 using namespace std;
 
 int findSpaceGroup(Crystal c, double prec = 0.05);
+void printLattice(double lat[9]);
 
 int main(int argc, char* argv[])
 {
@@ -44,6 +46,23 @@ int main(int argc, char* argv[])
   int spg = findSpaceGroup(c, tol);
 
   cout << "spg is " << spg << "\n";
+
+  // Let's niggli reduce
+
+  vector<vector<double>> latticeVecs = c.getLatticeVecs();
+
+  double lattice[9];
+  for (size_t i = 0; i < 3; i++) {
+    for (size_t j = 0; j < 3; j++) {
+      lattice[i * 3 + j] = latticeVecs.at(i).at(j);
+    }
+  }
+  cout << "lattice was:\n";
+  printLattice(lattice);
+  niggli_reduce(lattice, tol);
+  cout << "lattice is now:\n";
+  printLattice(lattice);
+
   return 0;
 }
 
@@ -100,4 +119,14 @@ int findSpaceGroup(Crystal c, double prec) {
   delete [] types;
 
   return spg;
+}
+
+void printLattice(double lat[9])
+{
+  for (size_t i = 0; i < 3; i++) {
+    for (size_t j = 0; j < 3; j++) {
+      cout << lat[i*3 + j] << "  ";
+    }
+    cout << "\n";
+  }
 }
