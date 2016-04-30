@@ -3,6 +3,8 @@ cell.c
 cell.h
 debug.c
 debug.h
+delaunay.c
+delaunay.h
 hall_symbol.c
 hall_symbol.h
 kgrid.c
